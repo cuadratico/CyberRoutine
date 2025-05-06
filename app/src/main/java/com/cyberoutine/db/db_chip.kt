@@ -12,9 +12,9 @@ class db_chip(context: Context): SQLiteOpenHelper(context,  "db_chip.db", null, 
 
         val list_chips = listOf(
             chip_data("NeuroNoti-F0", "A biochip that sends you a reminder notification every time you start a day, telling you how many tasks you have to do.", "2000", 1, 0),
-            chip_data("Neur0-Clock", "A biochip that lets you earn two more points for each task.", "5000", 1, 1),
-            chip_data("NeuroMoney-Infinite", "A biochip that lets you change the amount of money you have.", "10000", 1, 2),
-            chip_data("NeuroMoney-Simple", "A biochip that gives you the maximum amount of money you can earn for each task (1000 eurodollars).", "7000", 1, 3),
+            chip_data("Neur0-Clock", "A biochip that lets you earn two more points for each task.", "6000", 1, 1),
+            chip_data("NeuroMoney-Infinite", "A biochip that lets you change the amount of money you have.", "50000", 1, 2),
+            chip_data("NeuroMoney-Simple", "A biochip that gives you the maximum amount of money you can earn for each task (1000 eurodollars).", "12000", 1, 3),
             chip_data("NeuroSecure-S001", "A chip that gives you the ability to create a secure space for which you'll need biometric data and where you can save all the tasks you want to hide.", "15000", 1, 4)
         )
 
