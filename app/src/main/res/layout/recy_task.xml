@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fondo"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/borde_izquierda_rectangulo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        >
+
+        <CheckBox
+            android:id="@+id/task_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/fondo"
+            app:layout_constraintBottom_toBottomOf="@id/fondo"
+            app:layout_constraintStart_toStartOf="@id/fondo"
+            android:layout_marginStart="20dp"
+            />
+
+        <TextView
+            android:id="@+id/task"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/task_complete"
+            android:textSize="20dp"
+            android:textColor="@color/blue"
+            android:fontFamily="@font/cyber_font"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fondo"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/borde_izquierda_rectangulo"
+        android:fontFamily="@font/cyber_font"
+        android:textSize="20dp"
+        android:text="Delete"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        />
+
+
+    <TextView
+        android:id="@+id/money_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/delete_button"
+        app:layout_constraintBottom_toBottomOf="@id/delete_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/delete_button"
+        android:text="+1000 €$"
+        android:textSize="20dp"
+        android:fontFamily="@font/cyber_font"
+        android:textColor="@color/yellow"
+        />
+
+    <ImageView
+        android:id="@+id/image_puntuacion"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/cyberpunk_inteligencia"
+        app:layout_constraintTop_toTopOf="@id/delete_button"
+        app:layout_constraintBottom_toBottomOf="@id/delete_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/delete_button"
+        />
+    <TextView
+        android:id="@+id/puntuacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+1"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        android:fontFamily="@font/cyber_font"
+        app:layout_constraintTop_toTopOf="@id/delete_button"
+        app:layout_constraintBottom_toBottomOf="@id/delete_button"
+        app:layout_constraintEnd_toStartOf="@id/image_puntuacion"
+        android:layout_marginEnd="5dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/gradient_line"
+        app:layout_constraintTop_toBottomOf="@id/delete_button"
+        android:layout_marginTop="20dp"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

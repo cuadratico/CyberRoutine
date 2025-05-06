@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+    <View
+        android:id="@+id/fondo"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/borde_derecha_rectangulo"
+        />
+
+    <ImageView
+        android:id="@+id/image_hability"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/cyberpunk_inteligencia"
+        app:layout_constraintTop_toTopOf="@id/fondo"
+        app:layout_constraintBottom_toBottomOf="@id/fondo"
+        app:layout_constraintStart_toStartOf="@id/fondo"
+        android:layout_marginStart="20dp"
+        />
+
+    <TextView
+        android:id="@+id/name_hability"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Technical skill"
+        android:fontFamily="@font/cyber_font"
+        android:textColor="@color/blue"
+        android:textSize="20dp"
+        app:layout_constraintTop_toTopOf="@id/fondo"
+        app:layout_constraintBottom_toBottomOf="@id/fondo"
+        app:layout_constraintStart_toEndOf="@id/image_hability"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/points_hability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:fontFamily="@font/cyber_font"
+        android:textColor="@color/blue"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@id/fondo"
+        app:layout_constraintTop_toTopOf="@id/fondo"
+        app:layout_constraintBottom_toBottomOf="@id/fondo"
+        app:layout_constraintStart_toEndOf="@id/name_hability"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

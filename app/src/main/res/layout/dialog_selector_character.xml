@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient"
+    >
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lucy_selection"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/close"
+        app:layout_constraintTop_toTopOf="@id/close"
+        android:text="Choose a character"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        android:fontFamily="@font/cyber_font"
+        />
+
+    <View
+        android:id="@+id/center"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/gradient_line"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lucy_selection"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@id/center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/borde_izquierda_cuadrado"
+        android:layout_marginBottom="20dp"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagen_lucy"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/lucyna_kushinada"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imagen_lucy"
+            app:layout_constraintStart_toEndOf="@id/imagen_lucy"
+            app:layout_constraintBottom_toBottomOf="@id/imagen_lucy"
+            android:text="Lucy Kushinada"
+            android:textSize="20dp"
+            android:textColor="@color/blue"
+            android:gravity="center"
+            android:fontFamily="@font/cyber_font"
+            />
+
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="Lucy is a deadly and secretive netrunner in Cyberpunk: Edgerunners. Skilled in cyberspace and scarred by a dark past, she dreams of escaping Night City and finding freedom beyond the stars."
+            android:textColor="@color/blue"
+            android:fontFamily="@font/cyber_font"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/imagen_lucy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/david_selection"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/center"
+        android:background="@drawable/borde_izquierda_cuadrado"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagen_david"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/david_martinez"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imagen_david"
+            app:layout_constraintStart_toEndOf="@id/imagen_david"
+            app:layout_constraintBottom_toBottomOf="@id/imagen_david"
+            android:text="David Martinez"
+            android:textSize="20dp"
+            android:textColor="@color/blue"
+            android:gravity="center"
+            android:fontFamily="@font/cyber_font"
+            />
+
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="David Martínez is an impulsive young man in Cyberpunk: Edgerunners who, after a tragedy, plunges into the world of crime with a powerful military implant. Determined, loyal, and marked by his surroundings, he struggles to find his place in Night City."
+            android:textColor="@color/blue"
+            android:fontFamily="@font/cyber_font"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/imagen_david"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

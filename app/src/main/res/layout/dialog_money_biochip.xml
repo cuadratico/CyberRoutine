@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Write your task"
+        android:textSize="20dp"
+        android:textColor="@color/blue"
+        android:fontFamily="@font/cyber_font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/money"
+        android:layout_marginBottom="20dp"
+        />
+
+    <EditText
+        android:id="@+id/money"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:background="@drawable/borde"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20dp"
+        android:fontFamily="@font/cyber_font"
+        android:textColor="@color/yellow"
+        android:inputType="number"
+        android:gravity="center"
+        android:hint="100.."
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_change"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Add"
+        android:gravity="center"
+        android:fontFamily="@font/cyber_font"
+        android:textColor="@color/blue"
+        android:textSize="15dp"
+        android:background="@drawable/borde"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@id/money"
+        app:layout_constraintStart_toStartOf="@id/money"
+        app:layout_constraintTop_toBottomOf="@id/money"
+        android:layout_marginTop="20dp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
