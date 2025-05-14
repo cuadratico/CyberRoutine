@@ -46,7 +46,7 @@ class chipActivity : AppCompatActivity() {
 
         val db = db_chip(this)
         db.extraccion()
-        adapter = adapter_chip(chip_list)
+        adapter = adapter_chip(chip_list, this)
         recy.adapter = adapter
         recy.layoutManager = LinearLayoutManager(this)
 

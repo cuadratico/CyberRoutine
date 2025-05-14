@@ -10,9 +10,9 @@ import com.cyberoutine.R
 import com.cyberoutine.db.chip_data
 import com.cyberoutine.db.db_chip.Companion.chip_list
 
-class adapter_chip(var list: List<chip_data>): RecyclerView.Adapter<holder_chip>() {
+class adapter_chip(var list: List<chip_data>, val context: Activity): RecyclerView.Adapter<holder_chip>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): holder_chip {
-        return holder_chip(LayoutInflater.from(parent.context).inflate(R.layout.recy_chip, null))
+        return holder_chip(LayoutInflater.from(parent.context).inflate(R.layout.recy_chip, null), context)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

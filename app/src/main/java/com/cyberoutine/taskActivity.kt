@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
@@ -34,6 +35,8 @@ import androidx.security.crypto.MasterKey
 import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import androidx.work.Worker
+import androidx.work.workDataOf
 import com.cyberoutine.biochips.noti_chip
 import com.cyberoutine.db.db_task
 import com.cyberoutine.recy_task.adapter_task
@@ -89,8 +92,8 @@ class taskActivity : AppCompatActivity() {
             edit_money.visibility = View.INVISIBLE
         }
         if (pref.getBoolean("NeuroNoti-F0", false)){
-            val query = OneTimeWorkRequestBuilder<noti_chip>()
-            WorkManager.getInstance(this).equals(query)
+            val query = OneTimeWorkRequestBuilder<noti_chip>().build()
+            WorkManager.getInstance(this).enqueue(query)
         }
         if (pref.getBoolean("NeuroSecure-S001", false)){
             secure_space.visibility = View.VISIBLE

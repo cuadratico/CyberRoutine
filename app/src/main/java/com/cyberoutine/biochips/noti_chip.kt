@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.WorkSource
+import android.util.Log
 import android.webkit.ServiceWorkerClient
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -19,6 +20,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.cyberoutine.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
@@ -27,11 +29,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.LocalTime
 
-class noti_chip(val context: Activity, parameters: WorkerParameters): Worker(context, parameters)  {
-    @RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.O)
+class noti_chip (val context: Context, parameters: WorkerParameters): Worker(context, parameters)  {
     override fun doWork(): Result {
 
-        CoroutineScope(Dispatchers.IO).launch (start = CoroutineStart.LAZY) {
             val mk = MasterKey.Builder(context)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build()
@@ -44,21 +45,21 @@ class noti_chip(val context: Activity, parameters: WorkerParameters): Worker(con
                 }
                 if (LocalTime.now().hour == 12 && LocalTime.now().minute == 1 && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
                     val noti = NotificationCompat.Builder(context)
+                        .setChannelId("Noti_chip")
                         .setContentTitle("You have task")
                         .setContentText("You have ${pref.getInt("size", 0)} tasks to do")
+                        .setSmallIcon(R.mipmap.cyber_logo_round)
                         .setPriority(NotificationManager.IMPORTANCE_HIGH)
                         .build()
 
 
-                    NotificationManagerCompat.from(context).notify("Noti_chip", 1, noti)
+                    NotificationManagerCompat.from(context).notify(1, noti)
                     del = 10000
                 } else {
-                    ActivityCompat.requestPermissions(context, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 100)
-                    Toast.makeText(context, "The notification biochip is disabled", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "You have not entered the correct notification permissions.", Toast.LENGTH_SHORT).show()
                 }
-                delay(del.toLong())
+                Thread.sleep(del.toLong())
             }
-        }
 
         return Result.success()
     }

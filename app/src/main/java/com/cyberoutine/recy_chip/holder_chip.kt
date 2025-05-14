@@ -5,14 +5,17 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -21,9 +24,10 @@ import com.cyberoutine.db.chip_data
 import com.cyberoutine.db.db_chip
 import com.cyberoutine.db.db_chip.Companion.chip_list
 import com.cyberoutine.update_chip
+import java.util.jar.Manifest
 import javax.crypto.KeyGenerator
 
-class holder_chip(view: View): RecyclerView.ViewHolder(view) {
+class holder_chip(view: View, val context: Activity): RecyclerView.ViewHolder(view) {
 
     val price_chip = view.findViewById<TextView>(R.id.price)
     val name_chip = view.findViewById<TextView>(R.id.name_chip)
@@ -44,7 +48,6 @@ class holder_chip(view: View): RecyclerView.ViewHolder(view) {
             buy.visibility = View.INVISIBLE
         }
 
-        val context = price_chip.context
         buy.setOnClickListener {
             val mk = MasterKey.Builder(context)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -53,11 +56,15 @@ class holder_chip(view: View): RecyclerView.ViewHolder(view) {
 
             if (pref.getInt("money", 0) >= chipData.price.toInt()) {
                 if (chipData.position == 0){
-                    pref.edit().putBoolean(chip_list[chipData.position].name, true).commit()
+                    if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED){
+                        ActivityCompat.requestPermissions(context, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 100)
+                    }
+                    pref.edit().putBoolean(chipData.name, true).commit()
                     val notifi_manmager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                     val canal = NotificationChannel("Noti_chip", "chanel", NotificationManager.IMPORTANCE_HIGH)
 
                     notifi_manmager.createNotificationChannel(canal)
+
                 }
                 if (chipData.position == 4){
                     val keyg = KeyGenParameterSpec.Builder("key", KeyProperties.PURPOSE_DECRYPT or KeyProperties.PURPOSE_ENCRYPT)
