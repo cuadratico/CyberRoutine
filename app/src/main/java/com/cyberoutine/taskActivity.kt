@@ -91,10 +91,6 @@ class taskActivity : AppCompatActivity() {
         }else {
             edit_money.visibility = View.INVISIBLE
         }
-        if (pref.getBoolean("NeuroNoti-F0", false)){
-            val query = OneTimeWorkRequestBuilder<noti_chip>().build()
-            WorkManager.getInstance(this).enqueue(query)
-        }
         if (pref.getBoolean("NeuroSecure-S001", false)){
             secure_space.visibility = View.VISIBLE
         }else {

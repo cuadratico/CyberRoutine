@@ -1,23 +1,50 @@
 package com.cyberoutine
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Dialog
+import android.app.TimePickerDialog
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.shapes.Shape
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import com.cyberoutine.biochips.noti_chip
 import com.cyberoutine.db.db_user
 import com.cyberoutine.db.db_user.Companion.points_spec_list
 import com.cyberoutine.recy_hability.adapter_hability
+import com.google.android.material.imageview.ShapeableImageView
+import java.sql.Time
+import java.time.LocalTime
 
 class CharacterActivity : AppCompatActivity() {
+    private lateinit var time_dialog: TimePickerDialog
+    private lateinit var dialog: Dialog
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("UseKtx")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,7 +59,69 @@ class CharacterActivity : AppCompatActivity() {
 
         val image_cha = findViewById<ImageView>(R.id.image)
         val name_cha = findViewById<TextView>(R.id.name)
+        val clock = findViewById<ShapeableImageView>(R.id.clock)
         val recy = findViewById<RecyclerView>(R.id.recy_hability)
+
+        if (!pref.getBoolean("NeuroNoti-F0", false)){
+            clock.visibility = View.INVISIBLE
+        }
+
+        clock.setOnClickListener {
+            dialog = Dialog(this)
+            val view = LayoutInflater.from(this).inflate(R.layout.dialog_time_picker, null)
+
+            val time_visor = view.findViewById<TextView>(R.id.time_visor)
+            val time_edit = view.findViewById<ShapeableImageView>(R.id.edit_time)
+
+            val note = view.findViewById<EditText>(R.id.note)
+
+            val button_program = view.findViewById<AppCompatButton>(R.id.program)
+
+            time_visor.text = pref.getString("time", "${LocalTime.now().hour}:${LocalTime.now().minute}")
+            note.setText(pref.getString("note", ""))
+            time_edit.setOnClickListener {
+                val time = time_visor.text.toString().split(":")
+                time_dialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{_, hour, minute ->
+                    time_visor.text = "$hour:$minute"
+                    pref.edit().putString("time", "$hour:$minute").commit()
+                    time_dialog.dismiss()
+                },
+                    time[0].toInt(), time[1].toInt(), true)
+
+                time_dialog.show()
+            }
+
+            button_program.setOnClickListener {
+                if (note.text.isNotEmpty() && ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED){
+
+                    try {
+                        WorkManager.getInstance(this).cancelAllWorkByTag("noti_work")
+                    }catch(e: Exception){
+                        Log.e("nothing work", e.toString())
+                    }
+
+                    pref.edit().putString("note", note.text.toString()).commit()
+                    val query = OneTimeWorkRequestBuilder<noti_chip>()
+                        .addTag("noti_work")
+                        .build()
+
+                    WorkManager.getInstance(this).enqueue(query)
+                    Toast.makeText(this, "The notification has been scheduled", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+
+
+                }else {
+                    Toast.makeText(this, "You should add a reminder to the notification.", Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
+            dialog.setContentView(view)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+
+        }
 
         val (image, name) = characters[pref.getInt("character", 0)]
 

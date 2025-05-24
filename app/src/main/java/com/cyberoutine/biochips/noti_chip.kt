@@ -27,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalTime
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -38,16 +39,23 @@ class noti_chip (val context: Context, parameters: WorkerParameters): Worker(con
                 .build()
             val pref = EncryptedSharedPreferences.create(context, "ap", mk, EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
+            var del = 10000
+
             while (true) {
-                var del = 10000
-                if (LocalTime.now().hour == 11){
+                Log.e("worker", "activo")
+                val time = pref.getString("time", "12:12")!!.split(":")
+                if (LocalTime.now().hour == time[0].toInt() - 1 || LocalTime.now().hour == time[0].toInt()){
                     del = 500
                 }
-                if (LocalTime.now().hour == 12 && LocalTime.now().minute == 1 && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                if (LocalTime.now().hour == time[0].toInt() && LocalTime.now().minute == time[1].toInt() && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+
+                    val regex = Regex("-task")
+                    val noText = pref.getString("note", "")?.replace(regex, pref.getInt("size", 0).toString())
+
                     val noti = NotificationCompat.Builder(context)
                         .setChannelId("Noti_chip")
-                        .setContentTitle("You have task")
-                        .setContentText("You have ${pref.getInt("size", 0)} tasks to do")
+                        .setContentTitle("Reminder")
+                        .setContentText(noText)
                         .setSmallIcon(R.mipmap.cyber_logo_round)
                         .setPriority(NotificationManager.IMPORTANCE_HIGH)
                         .build()
@@ -55,12 +63,11 @@ class noti_chip (val context: Context, parameters: WorkerParameters): Worker(con
 
                     NotificationManagerCompat.from(context).notify(1, noti)
                     del = 10000
-                } else {
-                    Toast.makeText(context, "You have not entered the correct notification permissions.", Toast.LENGTH_SHORT).show()
+                    break
                 }
+
                 Thread.sleep(del.toLong())
             }
-
         return Result.success()
     }
 }

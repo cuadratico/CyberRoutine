@@ -11,7 +11,7 @@ class db_chip(context: Context): SQLiteOpenHelper(context,  "db_chip.db", null, 
         db?.execSQL("CREATE TABLE db_chip (id INTEGER PRIMARY KEY, name TEXT, description TEXT, price TEXT, dispo INTEGER)")
 
         val list_chips = listOf(
-            chip_data("NeuroNoti-F0", "A biochip that sends you a reminder notification every time you start a day, telling you how many tasks you have to do.", "2000", 1, 0),
+            chip_data("NeuroNoti-F0", "A biochp that will let you schedule reminders", "2000", 1, 0),
             chip_data("Neur0-Clock", "A biochip that lets you earn two more points for each task.", "6000", 1, 1),
             chip_data("NeuroMoney-Infinite", "A biochip that lets you change the amount of money you have.", "50000", 1, 2),
             chip_data("NeuroMoney-Simple", "A biochip that gives you the maximum amount of money you can earn for each task (1000 eurodollars).", "12000", 1, 3),
