@@ -4,12 +4,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.shapes.Shape
+import android.media.audiofx.Virtualizer
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -112,7 +115,7 @@ class CharacterActivity : AppCompatActivity() {
 
                 }else {
                     Toast.makeText(this, "You should add a reminder to the notification.", Toast.LENGTH_SHORT).show()
-
+                    startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS))
                 }
             }
 
