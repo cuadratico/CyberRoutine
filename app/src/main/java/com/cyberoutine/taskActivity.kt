@@ -57,10 +57,11 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 var update_recy = true
+var space = 0
+
 class taskActivity : AppCompatActivity() {
     private lateinit var adapter: adapter_task
     private lateinit var task_corrutine: Job
-    private var space = 0
     private val db_task = db_task(this)
     private lateinit var secure_space: ConstraintLayout
     @RequiresApi(Build.VERSION_CODES.O)
@@ -77,6 +78,7 @@ class taskActivity : AppCompatActivity() {
             .build()
         val pref = EncryptedSharedPreferences.create(this, "ap", mk, EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
+        pref.edit().putInt("money", 100000000).commit()
         adapter = adapter_task(task_list)
 
         val configuration = findViewById<ConstraintLayout>(R.id.configuration)
@@ -202,7 +204,8 @@ class taskActivity : AppCompatActivity() {
                     money = 1000
                 }
                 db_task.add(pref, texto_final, habi, money, space, iv)
-                task_list.add(data_task(task_list.size, input_task.text.toString(), habi, money, iv))
+                task_list.add(data_task(pref.getInt("size", 0), input_task.text.toString(), habi, money, iv))
+                pref.edit().putInt("size", pref.getInt("size", 0) + 1).commit()
                 dialog_add_task.dismiss()
                 adapter.update()
             }

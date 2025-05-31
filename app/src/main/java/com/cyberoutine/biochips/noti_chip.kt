@@ -50,7 +50,7 @@ class noti_chip (val context: Context, parameters: WorkerParameters): Worker(con
                 if (LocalTime.now().hour == time[0].toInt() && LocalTime.now().minute == time[1].toInt() && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
 
                     val regex = Regex("-task")
-                    val noText = pref.getString("note", "")?.replace(regex, pref.getInt("size", 0).toString())
+                    val noText = pref.getString("note", "")?.replace(regex, pref.getInt("size_normal", 0).toString())
 
                     val noti = NotificationCompat.Builder(context)
                         .setChannelId("Noti_chip")
