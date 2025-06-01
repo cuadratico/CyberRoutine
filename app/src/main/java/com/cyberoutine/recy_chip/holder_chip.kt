@@ -33,6 +33,7 @@ class holder_chip(view: View, val context: Activity): RecyclerView.ViewHolder(vi
     val name_chip = view.findViewById<TextView>(R.id.name_chip)
     val description_chip = view.findViewById<TextView>(R.id.description_chip)
     val buy = view.findViewById<AppCompatButton>(R.id.buy_button)
+    val bioBuy = view.findViewById<TextView>(R.id.biochip_buy)
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun elemento(chipData: chip_data){
@@ -44,8 +45,11 @@ class holder_chip(view: View, val context: Activity): RecyclerView.ViewHolder(vi
 
         if (chipData.dispo == 1){
             buy.visibility = View.VISIBLE
+            bioBuy.visibility = View.INVISIBLE
         }else {
             buy.visibility = View.INVISIBLE
+            bioBuy.visibility = View.VISIBLE
+            bioBuy.text = "${chipData.name} alredy bought"
         }
 
         buy.setOnClickListener {
@@ -86,6 +90,8 @@ class holder_chip(view: View, val context: Activity): RecyclerView.ViewHolder(vi
                 update_chip = true
 
                 buy.visibility = View.INVISIBLE
+                bioBuy.visibility = View.VISIBLE
+                bioBuy.text = "${chipData.name} alredy bought"
                 Toast.makeText(context, "The improvement has been implemented", Toast.LENGTH_SHORT).show()
             }else {
                 Toast.makeText(buy.context, "You are missing ${chipData.price.toInt() - pref.getInt("money", 0)} eurodollars", Toast.LENGTH_SHORT).show()
