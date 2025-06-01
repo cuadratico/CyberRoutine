@@ -78,7 +78,6 @@ class taskActivity : AppCompatActivity() {
             .build()
         val pref = EncryptedSharedPreferences.create(this, "ap", mk, EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
-        pref.edit().putInt("money", 100000000).commit()
         adapter = adapter_task(task_list)
 
         val configuration = findViewById<ConstraintLayout>(R.id.configuration)
