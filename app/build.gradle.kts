@@ -11,8 +11,8 @@ android {
         applicationId = "com.cyberoutine"
         minSdk = 24
         targetSdk = 35
-        versionCode = 10
-        versionName = "0.1.6"
+        versionCode = 11
+        versionName = "0.1.6:1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
