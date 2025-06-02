@@ -2,5 +2,6 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CybeRoutine" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/yellow</item>
+        <item name="colorSecondary">@color/yellow</item>
     </style>
 </resources>

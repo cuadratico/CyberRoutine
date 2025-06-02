@@ -137,7 +137,10 @@ class CharacterActivity : AppCompatActivity() {
         }
 
         recy.adapter = adapter_hability(points_spec_list)
-        recy.layoutManager = LinearLayoutManager(this)
+        recy.layoutManager = object: LinearLayoutManager(this) {
+            override fun canScrollHorizontally(): Boolean = false
+            override fun canScrollVertically(): Boolean = false
+        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
